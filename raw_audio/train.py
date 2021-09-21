@@ -58,6 +58,8 @@ parser.add_argument('--model', type=str, default='wavenet',
                     help='Model to use (wavenet/sequnet)')
 parser.add_argument('--sr', type=int, default=16000,
                     help="Sampling rate")
+parser.add_argument('--load_snapshot', type=str, default=None,
+                    help="Begin training from previously saved checkpoint (do not supply path in argument)")
 
 args = parser.parse_args()
 
@@ -131,7 +133,7 @@ trainer = Trainer(model=model,
                   )
 
 print('start training...')
-trainer.train(train_data, batch_size=args.batch_size, epochs=args.epochs)
+trainer.train(train_data, batch_size=args.batch_size, epochs=args.epochs, load_snapshot=args.load_snapshot)
 
 # TESTING
 print("start testing")
